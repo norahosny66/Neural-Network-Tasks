@@ -27,3 +27,19 @@ class PerceptronModel:
             y.append(np.sign(v))
 
         return y
+
+    def ConfusionMatrix(self, Y, y_pred):
+        FF = 0
+        FP = 0
+        PF = 0
+        PP = 0
+        for i in range(len(Y)):
+            if Y[i] == 1 and y_pred == 1:
+                PP += 1
+            elif Y[i] == -1 and y_pred == 1:
+                FP += 1
+            elif Y[i] == 1 and y_pred == -1:
+                PF += 1
+            elif Y[i] == -1 and y_pred == -1:
+                FF += 1
+        return FF, FP, PF, PP
