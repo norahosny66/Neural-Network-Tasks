@@ -2,16 +2,16 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-from UI import *
+import numpy as np
+
+from UI import UI_Controller
 from IrisDataset import *
 from Model import *
 
-dataset = IrisDataset()
-def print_hi(name):
 
+def print_hi(name):
     UI_Controller()
-    f1,f2,c1,c2,e,l,b=return_user_input()
-    print(f1,f2,c1,c2,e,l,b)
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
