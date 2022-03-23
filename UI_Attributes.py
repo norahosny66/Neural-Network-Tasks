@@ -1,33 +1,65 @@
 from tkinter import *
 import tkinter as t
 from tkinter.ttk import *
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from VisualizeClasses import *
 
 root = Tk()
 root.geometry('1200x900')
 
-Plotting_frame = t.Frame(root, background="snow")
+# user frame
+
 User_Input_frame = t.Frame(root, background="snow")
 
-Features_list=["X1","X2","X3","X4"]
-selected_feature1 = StringVar()
-selected_feature2 = StringVar()
-feature1_cb = Combobox(User_Input_frame, values=Features_list, textvariable=selected_feature1)
-feature1_label = Label(User_Input_frame, text="Feature 1")
-features2_label = Label(User_Input_frame, text="Feature 2")
+Features_list = ["X1", "X2", "X3", "X4"]
 
-Class_list=['Iris-setosa','Iris-versicolor','Iris-virginica']
+Class_list = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
 selected_class1 = StringVar()
 selected_class2 = StringVar()
-class1_cb = Combobox(User_Input_frame, values=Class_list, textvariable=selected_class1)
-class1_label = Label(User_Input_frame, text="Class 1").place(x=100, y=10)
-
+selected_feature1 = StringVar()
+selected_feature2 = StringVar()
 bias_selection = IntVar()
+epochs_number = IntVar()
+LR = DoubleVar()
 
-epochs_number=StringVar()
-epochs = t.ttk.Entry(User_Input_frame, width = 10, textvariable = epochs_number)
-epochs_label = Label(User_Input_frame, text="epochs number",  width=15).place(x=100, y=180)
-LR=StringVar()
-learning_rate = t.ttk.Entry(User_Input_frame, width = 10, textvariable = LR)
-learning_rate_label = Label(User_Input_frame, text="Learning rate",  width=15).place(x=100,y=150)
+Label(User_Input_frame, text="Class 1", background="snow").place(x=100, y=10)
+class1_cb = Combobox(User_Input_frame, values=Class_list, textvariable=selected_class1)
+class1_cb.place(x=200, y=10)
 
-Bias_CheckBox = Checkbutton(User_Input_frame, text=' Add Bias ', variable=bias_selection, onvalue=1, offvalue=0)
+Label(User_Input_frame, text="Class 2", background="snow", width=7).place(x=100, y=40)
+class2_cb = Combobox(User_Input_frame, textvariable=selected_class2)
+class2_cb.place(x=200, y=40)
+
+Label(User_Input_frame, text="Feature 1", background="snow").place(x=100, y=70)
+feature1_cb = Combobox(User_Input_frame, values=Features_list, textvariable=selected_feature1)
+feature1_cb.place(x=200, y=70)
+
+Label(User_Input_frame, text="Feature 2", background="snow").place(x=100, y=100)
+feature1_cb2 = Combobox(User_Input_frame, textvariable=selected_feature2)
+feature1_cb2.place(x=200, y=100)
+
+Label(User_Input_frame, text="Learning rate", width=15, background="snow").place(x=100, y=150)
+t.ttk.Entry(User_Input_frame, width=10, textvariable=LR).place(x=200, y=150)
+
+Label(User_Input_frame, text="epochs number", width=15, background="snow").place(x=100, y=180)
+t.ttk.Entry(User_Input_frame, width=10, textvariable=epochs_number).place(x=200, y=180)
+
+Checkbutton(User_Input_frame, text=' Add Bias ', variable=bias_selection, onvalue=1, offvalue=0).place(x=200, y=220)
+
+TrainButton = Button(User_Input_frame, text="Train")
+TrainButton.place(x=150, y=260)
+
+SwitchButtonUser = Button(User_Input_frame, text="Go to Plotting One")
+SwitchButtonUser.place(x=350, y=260)
+
+
+
+
+# build plotting frame
+Plotting_frame = t.Frame(root, background="snow")
+
+
+FigureCanvasTkAgg(Plot_2_Classes(), Plotting_frame)._tkcanvas.pack(fill=BOTH, expand=1)
+
+SwitchButtonPlotting = Button(Plotting_frame, text="Go to User Input")
+SwitchButtonPlotting.place(x=550, y=60)

@@ -34,12 +34,18 @@ class PerceptronModel:
         PF = 0
         PP = 0
         for i in range(len(Y)):
-            if Y[i] == 1 and y_pred == 1:
+            if Y[i][0] == 1 and y_pred[i][0] == 1:
                 PP += 1
-            elif Y[i] == -1 and y_pred == 1:
+            elif Y[i][0] == -1 and y_pred[i][0] == 1:
                 FP += 1
-            elif Y[i] == 1 and y_pred == -1:
+            elif Y[i][0] == 1 and y_pred[i][0] == -1:
                 PF += 1
-            elif Y[i] == -1 and y_pred == -1:
+            elif Y[i][0] == -1 and y_pred[i][0] == -1:
                 FF += 1
         return FF, FP, PF, PP
+
+    def GetPoints(self, X):
+        Y = []
+        for x1 in X:
+            Y.append((-self.weight[0] - self.weight[1] * x1) / self.weight[2])
+        return Y
