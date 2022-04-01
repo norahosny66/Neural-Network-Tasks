@@ -53,18 +53,33 @@ def TrainClick():
     ax.plot(Xpoint, model.GetPoints(Xpoint))
     ax.legend(loc='upper left')
     canvas = FigureCanvasTkAgg(fig, User_Input_frame)
-    canvas.get_tk_widget().place(x=550, y=20)
+    canvas.get_tk_widget().place(x=20, y=350)
 
     # test
     y_pred = model.predict(x_test)
 
     FF, FP, PF, PP = model.ConfusionMatrix(y_test, y_pred)
     test_accuracy = (FF + PP) / (FF + FP + PF + PP)
-    FF, FP, PF, PP = model.ConfusionMatrix(y_train, model.predict(x_train))
-    train_accuracy = (FF + PP) / (FF + FP + PF + PP)
+    FF2, FP2, PF2, PP2 = model.ConfusionMatrix(y_train, model.predict(x_train))
+    train_accuracy = (FF2 + PP2) / (FF2 + FP2 + PF2 + PP2)
 
-    print(test_accuracy)
-    print(train_accuracy)
+    # plotting ConfusionMatrix
+    Testlable.config(text='Test')
+    TestFFlable.config(text='FF : ' + str(FF))
+    TestFPlable.config(text='FP : ' + str(FP))
+    TestPFlable.config(text='PF : ' + str(PF))
+    TestPPlable.config(text='PP : ' + str(PP))
+    TestAccLable.config(text='Accuracy : ' + str(test_accuracy * 100) + '%')
+
+    Trainlable.config(text='Train')
+    TrainFFlable.config(text='FF : ' + str(FF2))
+    TrainFPlable.config(text='FP : ' + str(FP2))
+    TrainPFlable.config(text='PF : ' + str(PF2))
+    TrainPPlable.config(text='PP : ' + str(PP2))
+    TrainAccLable.config(text='Accuracy : ' + str(train_accuracy * 100) + '%')
+
+    # display theta
+    WightsLable.config(text='Decision line : {:.2f} X1 + {:.2f} X2 + {:.2f} = 0 '.format(model.weight[1][0], model.weight[2][0], model.weight[0][0]))
 
 
 def UI_Controller():
