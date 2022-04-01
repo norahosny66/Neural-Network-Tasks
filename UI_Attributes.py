@@ -52,12 +52,39 @@ TrainButton.place(x=150, y=260)
 SwitchButtonUser = Button(User_Input_frame, text="Go to Plotting One")
 SwitchButtonUser.place(x=350, y=260)
 
+Testlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+Testlable.place(x=550, y=10)
+
+TestFFlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TestFFlable.place(x=550, y=40)
+TestFPlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TestFPlable.place(x=550, y=70)
+TestPFlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TestPFlable.place(x=550, y=100)
+TestPPlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TestPPlable.place(x=550, y=130)
+TestAccLable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TestAccLable.place(x=550, y=160)
+
+Trainlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+Trainlable.place(x=750, y=10)
+TrainFFlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TrainFFlable.place(x=750, y=40)
+TrainFPlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TrainFPlable.place(x=750, y=70)
+TrainPFlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TrainPFlable.place(x=750, y=100)
+TrainPPlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TrainPPlable.place(x=750, y=130)
+TrainAccLable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+TrainAccLable.place(x=750, y=160)
 
 
+WightsLable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
+WightsLable.place(x=550, y=250)
 
 # build plotting frame
 Plotting_frame = t.Frame(root, background="snow")
-
 
 FigureCanvasTkAgg(Plot_2_Classes(), Plotting_frame)._tkcanvas.pack(fill=BOTH, expand=1)
 
