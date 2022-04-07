@@ -19,7 +19,7 @@ selected_class2 = StringVar()
 selected_feature1 = StringVar()
 selected_feature2 = StringVar()
 bias_selection = IntVar()
-epochs_number = IntVar()
+Threshold = DoubleVar()
 LR = DoubleVar()
 
 Label(User_Input_frame, text="Class 1", background="snow").place(x=100, y=10)
@@ -41,8 +41,8 @@ feature1_cb2.place(x=200, y=100)
 Label(User_Input_frame, text="Learning rate", width=15, background="snow").place(x=100, y=150)
 t.ttk.Entry(User_Input_frame, width=10, textvariable=LR).place(x=200, y=150)
 
-Label(User_Input_frame, text="epochs number", width=15, background="snow").place(x=100, y=180)
-t.ttk.Entry(User_Input_frame, width=10, textvariable=epochs_number).place(x=200, y=180)
+Label(User_Input_frame, text="Treshold", width=15, background="snow").place(x=100, y=180)
+t.ttk.Entry(User_Input_frame, width=10, textvariable=Threshold).place(x=200, y=180)
 
 Checkbutton(User_Input_frame, text=' Add Bias ', variable=bias_selection, onvalue=1, offvalue=0).place(x=200, y=220)
 
