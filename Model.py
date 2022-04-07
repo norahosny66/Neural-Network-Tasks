@@ -29,20 +29,22 @@ class PerceptronModel:
         return y
 
     def ConfusionMatrix(self, Y, y_pred):
-        FF = 0
         FP = 0
-        PF = 0
-        PP = 0
+        FN = 0
+        TP = 0
+        TN = 0
+        print(Y)
+        print(y_pred)
         for i in range(len(Y)):
-            if Y[i][0] == 1 and y_pred[i][0] == 1:
-                PP += 1
-            elif Y[i][0] == -1 and y_pred[i][0] == 1:
+            if Y[i] == 1 and y_pred[i] == 1:
+               TP += 1
+            elif Y[i] == -1 and y_pred[i]== 1:
                 FP += 1
-            elif Y[i][0] == 1 and y_pred[i][0] == -1:
-                PF += 1
-            elif Y[i][0] == -1 and y_pred[i][0] == -1:
-                FF += 1
-        return FF, FP, PF, PP
+            elif Y[i] == 1 and y_pred[i] == -1:
+                FN += 1
+            elif Y[i] == -1 and y_pred[i] == -1:
+                TN += 1
+        return TP, FP, TN, FN
 
     def GetPoints(self, X):
         Y = []

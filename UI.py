@@ -58,24 +58,24 @@ def TrainClick():
     # test
     y_pred = model.predict(x_test)
 
-    FF, FP, PF, PP = model.ConfusionMatrix(y_test, y_pred)
-    test_accuracy = (FF + PP) / (FF + FP + PF + PP)
-    FF2, FP2, PF2, PP2 = model.ConfusionMatrix(y_train, model.predict(x_train))
-    train_accuracy = (FF2 + PP2) / (FF2 + FP2 + PF2 + PP2)
+    TP, FP, TN, FN = model.ConfusionMatrix(y_test, y_pred)
+    test_accuracy = (TN + TP) / (TN + TP + FN + FP)
+    TP2, FP2, TN2, FN2 = model.ConfusionMatrix(y_train, model.predict(x_train))
+    train_accuracy = (TP2 + TN2) / (TN2 + FP2 +FN2 + TP2)
 
     # plotting ConfusionMatrix
     Testlable.config(text='Test')
-    TestFFlable.config(text='FF : ' + str(FF))
+    TestFFlable.config(text='TP : ' + str(TP))
     TestFPlable.config(text='FP : ' + str(FP))
-    TestPFlable.config(text='PF : ' + str(PF))
-    TestPPlable.config(text='PP : ' + str(PP))
+    TestPFlable.config(text='TN : ' + str(TN))
+    TestPPlable.config(text='FN : ' + str(FN))
     TestAccLable.config(text='Accuracy : ' + str(test_accuracy * 100) + '%')
 
     Trainlable.config(text='Train')
-    TrainFFlable.config(text='FF : ' + str(FF2))
+    TrainFFlable.config(text='TP : ' + str(TP2))
     TrainFPlable.config(text='FP : ' + str(FP2))
-    TrainPFlable.config(text='PF : ' + str(PF2))
-    TrainPPlable.config(text='PP : ' + str(PP2))
+    TrainPFlable.config(text='TN : ' + str(TN2))
+    TrainPPlable.config(text='FN : ' + str(FN2))
     TrainAccLable.config(text='Accuracy : ' + str(train_accuracy * 100) + '%')
 
     # display theta
