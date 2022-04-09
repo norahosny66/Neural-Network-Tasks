@@ -27,9 +27,9 @@ class IrisDataset:
         x_train2, x_test2 = train_test_split(Dataset2, train_size=0.6)
         x_train = np.concatenate([x_train1, x_train2])
         x_test = np.concatenate([x_test1, x_test2])
+        y_train = np.concatenate([np.zeros((30, 1)), np.ones((30, 1))]) * 2 - 1
+        y_test = np.concatenate([np.zeros((20, 1)), np.ones((20, 1))]) * 2 - 1
 
-        y_train = np.concatenate([np.zeros((30, 1)), np.ones((30, 1))])
-        y_test = np.concatenate([np.zeros((20, 1)), np.ones((20, 1))])
 
         p = np.random.permutation(len(y_train))
         x_train = x_train[p]
