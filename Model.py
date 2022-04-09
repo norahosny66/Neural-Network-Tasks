@@ -8,7 +8,7 @@ class AdalineModel:
         self.weight = np.random.rand(3, 1)
         if not isBias:
             self.weight[0] = 0
-        while True and Epochs != 0:
+        while Epochs != 0:
             i = 0
             for x1, x2 in x:
 
