@@ -29,18 +29,18 @@ def UserInputFrameBuilder():
 
 
 def return_user_input():
-    return selected_class1.get(), selected_class2.get(), selected_feature1.get(), selected_feature2.get(), LR.get(), Threshold.get(), bias_selection.get()
+    return selected_class1.get(), selected_class2.get(), selected_feature1.get(), selected_feature2.get(), LR.get(), Threshold.get(),Epochs.get(), bias_selection.get()
 
 
 def TrainClick():
-    class1, class2, feature1, feature2, learningRate, Threshold, isBias = return_user_input()
+    class1, class2, feature1, feature2, learningRate, Threshold,Epochs, isBias = return_user_input()
     Dataset1 = IrisDataset.GetDataSet(class1, [feature1, feature2])
     Dataset2 = IrisDataset.GetDataSet(class2, [feature1, feature2])
 
     x_train, y_train, x_test, y_test = IrisDataset.Train_Test_Splite(Dataset1, Dataset2)
 
     model = AdalineModel()
-    model.fit(x_train, y_train, isBias, learningRate, Threshold)
+    model.fit(x_train, y_train, isBias, learningRate, Threshold,Epochs)
 
     # plotting
     fig = Figure(figsize=(5, 5))

@@ -19,6 +19,7 @@ selected_class2 = StringVar()
 selected_feature1 = StringVar()
 selected_feature2 = StringVar()
 bias_selection = IntVar()
+Epochs = IntVar()
 Threshold = DoubleVar()
 LR = DoubleVar()
 
@@ -44,13 +45,16 @@ t.ttk.Entry(User_Input_frame, width=10, textvariable=LR).place(x=200, y=150)
 Label(User_Input_frame, text="Treshold", width=15, background="snow").place(x=100, y=180)
 t.ttk.Entry(User_Input_frame, width=10, textvariable=Threshold).place(x=200, y=180)
 
-Checkbutton(User_Input_frame, text=' Add Bias ', variable=bias_selection, onvalue=1, offvalue=0).place(x=200, y=220)
+Label(User_Input_frame, text="Epochs", width=15, background="snow").place(x=100, y=210)
+t.ttk.Entry(User_Input_frame, width=10, textvariable=Epochs).place(x=200, y=210)
+
+Checkbutton(User_Input_frame, text=' Add Bias ', variable=bias_selection, onvalue=1, offvalue=0).place(x=200, y=240)
 
 TrainButton = Button(User_Input_frame, text="Train")
-TrainButton.place(x=150, y=260)
+TrainButton.place(x=150, y=270)
 
 SwitchButtonUser = Button(User_Input_frame, text="Go to Plotting One")
-SwitchButtonUser.place(x=350, y=260)
+SwitchButtonUser.place(x=350, y=270)
 
 Testlable = Label(User_Input_frame, text="", font='Helvetica 10 bold', background="snow")
 Testlable.place(x=550, y=10)

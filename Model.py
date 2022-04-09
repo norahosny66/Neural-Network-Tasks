@@ -4,13 +4,12 @@ import pandas as pd
 
 class AdalineModel:
 
-    def fit(self, x, y, isBias, learningRate, Threshold):
+    def fit(self, x, y, isBias, learningRate, Threshold,Epochs):
         self.weight = np.random.rand(3, 1)
         if not isBias:
             self.weight[0] = 0
-        while True:
+        while True and Epochs != 0:
             i = 0
-
             for x1, x2 in x:
 
                 v = self.weight[0][0] + self.weight[1][0] * x1 + self.weight[2][0] * x2
@@ -37,6 +36,7 @@ class AdalineModel:
                 error = y[i][0]-v
                 sum += (error * error)
                 i += 1
+            Epochs-=1
             msq = sum / (2 * x.shape[0])
             print(msq,x.shape[0])
             if msq < Threshold:
