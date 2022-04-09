@@ -33,8 +33,7 @@ class PerceptronModel:
         FN = 0
         TP = 0
         TN = 0
-        print(Y)
-        print(y_pred)
+
         for i in range(len(Y)):
             if Y[i] == 1 and y_pred[i] == 1:
                TP += 1
