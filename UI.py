@@ -58,6 +58,7 @@ def TrainClick():
     # test
     y_pred = model.predict(x_test)
 
+    #print(y_pred)
     TP, FP, TN, FN = model.ConfusionMatrix(y_test, y_pred)
     test_accuracy = (TN + TP) / (TN + TP + FN + FP)
     TP2, FP2, TN2, FN2 = model.ConfusionMatrix(y_train, model.predict(x_train))
@@ -78,9 +79,10 @@ def TrainClick():
     TrainPPlable.config(text='FN : ' + str(FN2))
     TrainAccLable.config(text='Accuracy : ' + str(train_accuracy * 100) + '%')
 
+    #print("bias ",model.weight[0][0])
     # display theta
-    WightsLable.config(text='Decision line : {:.2f} X1 + {:.2f} X2 + {:.2f} = 0 '.format(model.weight[1][0], model.weight[2][0], model.weight[0][0]))
-
+    Decisionline= str(format(model.weight[1][0],".3f")+" X1 + ") +str(format(model.weight[2][0],".3f")+" X2 + ")+str(format(model.weight[0][0],".3f")+" =0 ")
+    WightsLable.config(text='Decision line :' + str(Decisionline))
 
 def UI_Controller():
     # build user input frame
