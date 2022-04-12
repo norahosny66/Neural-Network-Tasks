@@ -79,7 +79,7 @@ def TrainClick():
     TrainPPlable.config(text='FN : ' + str(FN2))
     TrainAccLable.config(text='Accuracy : ' + str(train_accuracy * 100) + '%')
 
-    #print("bias ",model.weight[0][0])
+    print("bias ",model.weight[0][0])
     # display theta
     Decisionline= str(format(model.weight[1][0],".3f")+" X1 + ") +str(format(model.weight[2][0],".3f")+" X2 + ")+str(format(model.weight[0][0],".3f")+" =0 ")
     WightsLable.config(text='Decision line :' + str(Decisionline))
