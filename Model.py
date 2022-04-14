@@ -29,10 +29,7 @@ class AdalineModel:
             i=0
             for x1, x2 in x:
                 v = self.weight[0][0] + self.weight[1][0] * x1 + self.weight[2][0] * x2
-                if v < 0:
-                    v = 0
-                else:
-                    v = 1
+            
                 error = y[i][0]-v
                 sum += (error * error)
                 i += 1
