@@ -1,47 +1,24 @@
 from matplotlib.figure import Figure
 from UI_Attributes import *
-from Model import *
-
-
-def SwitchFrame(frame1, frame2):
-    frame1.pack_forget()
-    frame2.pack(fill=BOTH, expand=1)
-
-
+from ForwardStep import*
 
 def UserInputFrameBuilder():
-
     TrainButton['command'] = lambda: TrainClick()
-
-
 
 def return_user_input():
     return HiddenLayers.get(),Neurons.get(), LR.get(),Epochs.get(),selected_Activation_fn.get(), bias_selection.get()
 
 def TrainClick():
-    HiddenLayers, Neurons, learningRate, feature2, Epochs, selected_Activation_fn,isBias = return_user_input()
+    HiddenLayers, Neurons, learningRate, Epochs, ActivationFn,isBias = return_user_input()
+    neurons=[]
+    for i in range(HiddenLayers):
+      neurons.append(int(Neurons.split(',')[i]))
 
-    Dataset1=1
-    Dataset2=2
-    x_train, y_train, x_test, y_test = IrisDataset.Train_Test_Splite(Dataset1, Dataset2)
-
-    model = AdalineModel()
-    #model.fit(x_train, y_train, isBias, learningRate, Threshold,Epochs)
-
-    # plotting
-    fig = Figure(figsize=(5, 5))
-    ax = fig.subplots()
-   # ax.scatter(Dataset1.values[:, 0], Dataset1.values[:, 1], label=class1, c='blue')
-   # ax.scatter(Dataset2.values[:, 0], Dataset2.values[:, 1], label=class2, c='red')
-   # ax.set_xlabel(feature1)
-    ax.set_ylabel(feature2)
-    Xpoint = [min(x_train[:, 0]), max(x_train[:, 0])]
-    ax.plot(Xpoint, model.GetPoints(Xpoint))
-    ax.legend(loc='upper left')
-    canvas = FigureCanvasTkAgg(fig, User_Input_frame)
-    canvas.get_tk_widget().place(x=20, y=350)
-
+    x_train, y_train, x_test, y_test = IrisDataset.Train_Test_Splite()
+    AllWeights=CreateWeightMatrix(HiddenLayers, neurons)
+    forward(x_train, isBias,AllWeights,1,ActivationFn)
     # test
+'''''
     y_pred = model.predict(x_test)
 
     TP, FP, TN, FN = model.ConfusionMatrix(y_test, y_pred)
@@ -63,10 +40,10 @@ def TrainClick():
     TrainPFlable.config(text='TN : ' + str(TN2))
     TrainPPlable.config(text='FN : ' + str(FN2))
     TrainAccLable.config(text='Accuracy : ' + str(train_accuracy * 100) + '%')
-
-    # display theta
-    WightsLable.config(text='Decision line : {:.2f} X1 + {:.2f} X2 + {:.2f} = 0 '.format(model.weight[1][0], model.weight[2][0], model.weight[0][0]))
-
+    
+     # display theta
+    #WightsLable.config(text='Decision line : {:.2f} X1 + {:.2f} X2 + {:.2f} = 0 '.format(model.weight[1][0], model.weight[2][0], model.weight[0][0]))
+'''
 
 def UI_Controller():
     # build user input frame
