@@ -6,8 +6,6 @@ import numpy as np
 
 from UI import UI_Controller
 from IrisDataset import *
-from Model import *
-
 
 def print_hi(name):
     UI_Controller()
