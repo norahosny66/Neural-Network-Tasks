@@ -1,23 +1,28 @@
 from matplotlib.figure import Figure
 from UI_Attributes import *
-from ForwardStep import*
+from ForwardStep import *
+
 
 def UserInputFrameBuilder():
     TrainButton['command'] = lambda: TrainClick()
 
+
 def return_user_input():
-    return HiddenLayers.get(),Neurons.get(), LR.get(),Epochs.get(),selected_Activation_fn.get(), bias_selection.get()
+    return HiddenLayers.get(), Neurons.get(), LR.get(), Epochs.get(), selected_Activation_fn.get(), bias_selection.get()
+
 
 def TrainClick():
-    HiddenLayers, Neurons, learningRate, Epochs, ActivationFn,isBias = return_user_input()
-    neurons=[]
+    HiddenLayers, Neurons, learningRate, Epochs, ActivationFn, isBias = return_user_input()
+    neurons = []
     for i in range(HiddenLayers):
-      neurons.append(int(Neurons.split(',')[i]))
+        neurons.append(int(Neurons.split(',')[i]))
 
     x_train, y_train, x_test, y_test = IrisDataset.Train_Test_Splite()
-    AllWeights=CreateWeightMatrix(HiddenLayers, neurons)
-    forward(x_train, isBias,AllWeights,1,ActivationFn)
+    AllWeights = CreateWeightMatrix(HiddenLayers, neurons)
+    forward(x_train, isBias, AllWeights, 1, ActivationFn)
     # test
+
+
 '''''
     y_pred = model.predict(x_test)
 
@@ -44,6 +49,7 @@ def TrainClick():
      # display theta
     #WightsLable.config(text='Decision line : {:.2f} X1 + {:.2f} X2 + {:.2f} = 0 '.format(model.weight[1][0], model.weight[2][0], model.weight[0][0]))
 '''
+
 
 def UI_Controller():
     # build user input frame
