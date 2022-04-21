@@ -28,51 +28,49 @@ def TrainClick():
     else:
         x_train = np.insert(x_train, 0, 0, axis=1)
         x_test = np.insert(x_test, 0, 0, axis=1)
-
+    all_train_samples = []
     for epoch in range(Epochs):
         for sample in range(len(x_train)):
             allnets = forward(x_train[sample], isBias, AllWeights, ActivationFn)
+            if epoch == Epochs - 1:
+                encoded_train = backward_step.encode(allnets[-1])
+                all_train_samples.append(encoded_train)
             signal_error = backward_step.backward(AllWeights, allnets, y_train[sample], ActivationFn)
             AllWeights = backward_step.update_weights(AllWeights, signal_error, allnets, x_train[sample], learningRate)
+    all_train_samples = np.array(all_train_samples)
 
     # Test
     all_pred_samples = []
     for sample in range(len(x_test)):
         encoded_out = test.testt(x_test[sample], isBias, AllWeights, ActivationFn)
         all_pred_samples.append(encoded_out)
-
     all_pred_samples = np.array(all_pred_samples)
-    print(all_pred_samples)
-    accuracy = metrics.accuracy_score(y_test, all_pred_samples)
-    print(accuracy)
+
+ #accuracy
+    Train_accuracy = metrics.accuracy_score(y_train, all_train_samples) * 100
+    print("Train Accuracy ", Train_accuracy)
+    Test_accuracy = metrics.accuracy_score(y_test, all_pred_samples) * 100
+    print("Test Accuracy ", Test_accuracy)
+
+#confusion
+    y_test=encoded_to_labels(y_test)
+    all_pred_samples=encoded_to_labels(all_pred_samples)
+    print(metrics.confusion_matrix(y_test, all_pred_samples,labels=["Setosa","Versi_Color","Virginica"]))
+    # Printing the precision and recall, among other metrics
+    print(metrics.classification_report(y_test, all_pred_samples,labels=["Setosa","Versi_Color","Virginica"]))
 
 
-'''''
-    y_pred = model.predict(x_test)
+def encoded_to_labels(y):
+    y_label = []
+    for sample in y:
+        if (sample == np.array([1, 0, 0])).all():
+            y_label.append("Setosa")
+        elif (sample == np.array([0, 1, 0])).all():
+            y_label.append("Versi_Color")
+        else:
+            y_label.append("Virginica")
+    return y_label
 
-    TP, FP, TN, FN = model.ConfusionMatrix(y_test, y_pred)
-    test_accuracy = (TN + TP) / (TN + TP + FN + FP)
-    TP2, FP2, TN2, FN2 = model.ConfusionMatrix(y_train, model.predict(x_train))
-    train_accuracy = (TP2 + TN2) / (TN2 + FP2 + FN2 + TP2)
-
-    # plotting ConfusionMatrix
-    Testlable.config(text='Test')
-    TestFFlable.config(text='TP : ' + str(TP))
-    TestFPlable.config(text='FP : ' + str(FP))
-    TestPFlable.config(text='TN : ' + str(TN))
-    TestPPlable.config(text='FN : ' + str(FN))
-    TestAccLable.config(text='Accuracy : ' + str(test_accuracy * 100) + '%')
-
-    Trainlable.config(text='Train')
-    TrainFFlable.config(text='TP : ' + str(TP2))
-    TrainFPlable.config(text='FP : ' + str(FP2))
-    TrainPFlable.config(text='TN : ' + str(TN2))
-    TrainPPlable.config(text='FN : ' + str(FN2))
-    TrainAccLable.config(text='Accuracy : ' + str(train_accuracy * 100) + '%')
-    
-     # display theta
-    #WightsLable.config(text='Decision line : {:.2f} X1 + {:.2f} X2 + {:.2f} = 0 '.format(model.weight[1][0], model.weight[2][0], model.weight[0][0]))
-'''
 
 
 def UI_Controller():

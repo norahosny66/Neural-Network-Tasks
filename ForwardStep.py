@@ -12,10 +12,10 @@ Initialize random weights
 
 def CreateWeightMatrix(hiddenlayers, neurons):
     AllWeights = []
-    AllWeights.append(np.random.rand(neurons[0], 5))
+    AllWeights.append(np.random.rand(neurons[0], 5)*np.sqrt(2/ 5))
     for i in range(hiddenlayers - 1):
-        AllWeights.append(np.random.rand(neurons[i + 1], neurons[i] + 1))
-    AllWeights.append(np.random.rand(3, neurons[-1] + 1))
+        AllWeights.append(np.random.rand(neurons[i + 1], neurons[i] + 1)*np.sqrt(2/ neurons[i]))
+    AllWeights.append(np.random.rand(3, neurons[-1] + 1)*np.sqrt(2/ 3))
     return AllWeights
 
 
@@ -43,7 +43,7 @@ def forward(x, isBias, AllWeights, ActivitionFn):
             else:
                 neuron_net = np.dot(AllLayersOutput[layer - 1], AllWeights[layer][neuron])
 
-            if ActivitionFn == Sigmoid:
+            if ActivitionFn == "Sigmoid":
                 LayerOutput.append(Sigmoid(neuron_net).round(3))
             else:
                 LayerOutput.append(HyperbolicTangent(neuron_net).round(3))

@@ -14,11 +14,11 @@ def encode(y):
 
 
 def sigmoid_drev(net):
-    return np.array(net) * (1 - np.array(net))
+    return net * (1 - net)
 
 
 def hyperbolic_tangent_drev(net):
-    return 1 - (np.array(net) ** 2)
+    return 1 - (np.power(net,2))
 
 
 def activation_check(net, activation_type):
@@ -33,12 +33,9 @@ def backward(all_weights, all_nets, actual_output, activation_fn):
 
     all_signal_error = []
     for layer_index in range(len(all_nets)):
-        if layer_index == 0:  # last layer
-            last_layer_encoded_nets = encode(all_nets[layer_index])
         layer_signal_error = []
 
         for neuron in range(len(all_nets[layer_index])):
-
             if layer_index == 0:  # last layer
                 neuron_error = ( actual_output[neuron]-all_nets[layer_index][neuron] ) * activation_check(
                     all_nets[layer_index][neuron], activation_fn)
