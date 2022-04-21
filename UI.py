@@ -1,6 +1,8 @@
 from matplotlib.figure import Figure
 from UI_Attributes import *
+from sklearn import metrics
 from ForwardStep import *
+from test import *
 
 
 def UserInputFrameBuilder():
@@ -19,8 +21,30 @@ def TrainClick():
 
     x_train, y_train, x_test, y_test = IrisDataset.Train_Test_Splite()
     AllWeights = CreateWeightMatrix(HiddenLayers, neurons)
-    forward(x_train, isBias, AllWeights, 1, ActivationFn)
-    # test
+    wibhhndbj = AllWeights
+    if isBias:
+        x_train = np.insert(x_train, 0, 1, axis=1)
+        x_test = np.insert(x_test, 0, 1, axis=1)
+    else:
+        x_train = np.insert(x_train, 0, 0, axis=1)
+        x_test = np.insert(x_test, 0, 0, axis=1)
+
+    for epoch in range(Epochs):
+        for sample in range(len(x_train)):
+            allnets = forward(x_train[sample], isBias, AllWeights, ActivationFn)
+            signal_error = backward_step.backward(AllWeights, allnets, y_train[sample], ActivationFn)
+            AllWeights = backward_step.update_weights(AllWeights, signal_error, allnets, x_train[sample], learningRate)
+
+    # Test
+    all_pred_samples = []
+    for sample in range(len(x_test)):
+        encoded_out = test.testt(x_test[sample], isBias, AllWeights, ActivationFn)
+        all_pred_samples.append(encoded_out)
+
+    all_pred_samples = np.array(all_pred_samples)
+    print(all_pred_samples)
+    accuracy = metrics.accuracy_score(y_test, all_pred_samples)
+    print(accuracy)
 
 
 '''''
