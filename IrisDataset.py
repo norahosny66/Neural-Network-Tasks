@@ -23,5 +23,8 @@ class IrisDataset:
         y_train = np.concatenate(
             [np.full((30, 3), [1, 0, 0]), np.full((30, 3), [0, 1, 0]), np.full((30, 3), [0, 0, 1])])
         y_test = np.concatenate([np.full((20, 3), [1, 0, 0]), np.full((20, 3), [0, 1, 0]), np.full((20, 3), [0, 0, 1])])
+        p = np.random.permutation(len(y_train))
+        x_train = x_train[p]
+        y_train = y_train[p]
 
         return x_train, y_train, x_test, y_test

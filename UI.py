@@ -39,6 +39,7 @@ def TrainClick():
             AllWeights = backward_step.update_weights(AllWeights, signal_error, allnets, x_train[sample], learningRate)
     all_train_samples = np.array(all_train_samples)
 
+
     # Test
     all_pred_samples = []
     for sample in range(len(x_test)):
