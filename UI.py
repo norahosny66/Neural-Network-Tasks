@@ -36,9 +36,8 @@ def TrainClick():
             AllWeights = backward_step.update_weights(AllWeights, signal_error, allnets, x_train[sample], learningRate)
 
     # get train values encoded
-    for sample in range(len(x_train)):
-        allnets = forward(x_train[sample], isBias, AllWeights, ActivationFn)
-        encoded_train = backward_step.encode(allnets[-1])
+    for sample in range(len(x_train))
+        encoded_train =  test.testt(x_train[sample], isBias, AllWeights, ActivationFn)
         all_train_samples.append(encoded_train)
     all_train_samples = np.array(all_train_samples)
     # Test
