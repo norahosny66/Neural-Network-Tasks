@@ -32,14 +32,15 @@ def TrainClick():
     for epoch in range(Epochs):
         for sample in range(len(x_train)):
             allnets = forward(x_train[sample], isBias, AllWeights, ActivationFn)
-            if epoch == Epochs - 1:
-                encoded_train = backward_step.encode(allnets[-1])
-                all_train_samples.append(encoded_train)
             signal_error = backward_step.backward(AllWeights, allnets, y_train[sample], ActivationFn)
             AllWeights = backward_step.update_weights(AllWeights, signal_error, allnets, x_train[sample], learningRate)
+
+    # get train values encoded
+    for sample in range(len(x_train)):
+        allnets = forward(x_train[sample], isBias, AllWeights, ActivationFn)
+        encoded_train = backward_step.encode(allnets[-1])
+        all_train_samples.append(encoded_train)
     all_train_samples = np.array(all_train_samples)
-
-
     # Test
     all_pred_samples = []
     for sample in range(len(x_test)):
